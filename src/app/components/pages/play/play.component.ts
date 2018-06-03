@@ -8,18 +8,13 @@ import { playerSetup } from './../../../functions/player/player';
 // movement
 import { animateMovement } from './../../../functions/player/movement';
 // trees
-import {
-  treeOne as stageOneTreeOneSetup,
-  treeTwo as stageOneTreeTwoSetup,
-  treeThree as stageOneTreeThreeSetup,
-  treeFour as stageOneTreeFourSetup,
-  treeFive as stageOneTreeFiveSetup,
-  treeSix as stageOneTreeSixSetup,
-  treeSeven as stageOneTreeSevenSetup,
-  treeEight as stageOneTreeEightSetup,
-  treeNine as stageOneTreeNineSetup,
-  treeTen as stageOneTreeTenSetup,
-} from './../../../functions/trees/stage1';
+import { trees as stageOneTreesSetup } from './../../../functions/trees/stage1';
+import { trees as stageTwoTreesSetup } from './../../../functions/trees/stage2';
+import { trees as stageThreeTreesSetup } from './../../../functions/trees/stage3';
+import { trees as stageFourTreesSetup } from './../../../functions/trees/stage4';
+import { trees as stageFiveTreesSetup } from './../../../functions/trees/stage5';
+import { trees as stageSixTreesSetup } from './../../../functions/trees/stage6';
+import { trees as stageSevenTreesSetup } from './../../../functions/trees/stage7';
 // musics
 import { startMusic, stopMusic, startMusicOnce } from './../../../functions/musics/music';
 // canvas
@@ -326,46 +321,37 @@ export class PlayComponent implements OnInit {
   }
 
   initTrees() {
-    let treeOneInit,
-      treeTwoInit,
-      treeThreeInit,
-      treeFourInit,
-      treeFiveInit,
-      treeSixInit,
-      treeSevenInit,
-      treeEightInit,
-      treeNineInit,
-      treeTenInit;
+    let treesInit;
 
     this.treeOne = document.getElementById('tree-1');
     this.treeTwo = document.getElementById('tree-2');
     this.treeThree = document.getElementById('tree-3');
     this.treeFour = document.getElementById('tree-4');
+    this.treeFive = document.getElementById('tree-5');
+    this.treeSix = document.getElementById('tree-6');
+    this.treeSeven = document.getElementById('tree-7');
+    this.treeEight = document.getElementById('tree-8');
+    this.treeNine = document.getElementById('tree-9');
+    this.treeTen = document.getElementById('tree-10');
 
-    treeOneInit = stageOneTreeOneSetup(this.treeOne);
-    treeTwoInit = stageOneTreeTwoSetup(this.treeTwo);
-    treeThreeInit = stageOneTreeThreeSetup(this.treeThree);
-    treeFourInit = stageOneTreeFourSetup(this.treeFour);
+    treesInit = stageOneTreesSetup(
+      this.treeOne, this.treeTwo, this.treeThree, this.treeFour, this.treeFive,
+      this.treeSix, this.treeSeven, this.treeEight, this.treeNine, this.treeTen
+    );
 
-    this.treeOne = treeOneInit.element;
-    this.treeTwo = treeTwoInit.element;
-    this.treeThree = treeThreeInit.element;
-    this.treeFour = treeFourInit.element;
+    this.treeOne = treesInit.treeOneElement;
+    this.treeTwo = treesInit.treeTwoElement;
+    this.treeThree = treesInit.treeThreeElement;
+    this.treeFour = treesInit.treeFourElement;
+    this.treeFive = treesInit.treeFiveElement;
+    this.treeSix = treesInit.treeSixElement;
+    this.treeSeven = treesInit.treeSevenElement;
+    this.treeEight = treesInit.treeEightElement;
+    this.treeNine = treesInit.treeNineElement;
+    this.treeTen = treesInit.treeTenElement;
 
-    this.obstacleX = [
-      ...this.obstacleX,
-      ...treeOneInit.obstacleX,
-      ...treeTwoInit.obstacleX,
-      ...treeThreeInit.obstacleX,
-      ...treeFourInit.obstacleX,
-    ];
-    this.obstacleY = [
-      ...this.obstacleY,
-      ...treeOneInit.obstacleY,
-      ...treeTwoInit.obstacleY,
-      ...treeThreeInit.obstacleY,
-      ...treeFourInit.obstacleY,
-    ];
+    this.obstacleX = [...this.obstacleX, ...treesInit.obstacleX];
+    this.obstacleY = [...this.obstacleY, ...treesInit.obstacleY];
   }
 
   initPlayer() {

@@ -43,6 +43,21 @@ table {
                 border-radius: 6px;
                 border: 2px solid black;
             }
+            &.upgrade-confirm {
+                padding: 0;
+                display: block;
+                padding: 10px 0px;
+                text-align: center;
+                width: 100%;
+                background-color: #F4B61A;
+                border: 2px solid black;
+                border-radius: 6px;
+                &:hover {
+                    background-color: white;
+                    color: #0B2027;
+                    cursor: pointer;
+                }
+            }
         }
     }
 }

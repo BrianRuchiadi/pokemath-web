@@ -1,4 +1,4 @@
-// create trees for stage 1
+// create trees for stage 2
 export const trees = (
     treeOneElement,
     treeTwoElement, 
