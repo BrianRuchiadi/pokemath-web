@@ -1,0 +1,26 @@
+header {
+    box-shadow: 7px 3px 10px black;
+    font-family: 'Oswald', sans-serif;
+    background-color: #FFFFFF;
+    .logo {
+        vertical-align: middle;
+        display: inline-block;
+        width: 250px;
+        height: 90px;
+        background-image: url('/assets/logo.png');
+        background-size: cover;
+    }
+    ul {
+        display: inline-block;
+        vertical-align: middle;
+        li {
+            padding: 0px 20px;
+            list-style-type: none;
+            display: inline-block;
+            &:hover {
+                cursor: pointer;
+                color: #FFC62D;
+            }
+        }
+    }
+}

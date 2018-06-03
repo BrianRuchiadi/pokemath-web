@@ -1,0 +1,115 @@
+<table class="gameboard">
+    <thead>
+        <tr>
+            <th colspan="2">
+                <button class="exit" (click)="goToMenu()">
+                  <i class="fa fa-home"></i>
+                  Back To Menu
+                </button>
+            </th>
+        </tr>
+        <tr>
+            <th colspan="2">
+                <h1>Stage One</h1>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Level</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>Exp to next level</td>
+            <td class="exp-bar">
+                <span id="exp"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Pokemons in this area</td>
+            <td>
+                <img src="/assets/pokedex/squirtle-obtained.png" />
+                <img src="/assets/pokedex/charmander-obtained.png" />
+                <img src="/assets/pokedex/bulbasaur-obtained.png" />
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="battle-options" id="battle-options">
+    <div class="run" (click)="escape()">Run</div>
+</div>
+<div class="container" id="container">
+    <div class="roaming" id="roaming">
+        <div class="player" id="player"></div>
+        <div class="tree" id="tree-1"></div>
+        <div class="tree" id="tree-2"></div>
+        <div class="tree" id="tree-3"></div>
+        <div class="tree" id="tree-4"></div>
+        <div class="tree" id="tree-5"></div>
+        <div class="tree" id="tree-6"></div>
+        <div class="tree" id="tree-7"></div>
+        <div class="tree" id="tree-8"></div>
+        <div class="tree" id="tree-9"></div>
+        <div class="tree" id="tree-10"></div>
+
+        <div class="pokemon" id="pokemon-1">
+        </div>
+        <div class="pokemon" id="pokemon-2">
+        </div>
+    </div>
+    <div class="battle" id="battle">
+        <div class="pokemon-detail" id="pokemon-detail">
+            <span class="pokemon-name">Charmander</span>
+            <span class="pokemon-exp">Exp: 50</span>
+            <div class="pokemon-health">
+                <span class="hp">HP</span>
+                <div class="health-bar">
+                    <div class="health" id="foe-health"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pokemon-position">
+            <img src="/assets/pokemons/charmander.gif" class="pokemon-active" id="battle-pokemon" />
+            <div class="battle-patch"></div>
+        </div>
+
+        <div class="attack-options">
+            <div class="multiplication" (click)="attack('multiplication')" id="multiplication">Multiplication</div>
+            <div class="division" (click)="attack('division')" id="division">Division</div>
+            <div class="addition" (click)="attack('addition')" id="addition">Addition</div>
+            <div class="subtraction" (click)="attack('subtraction')" id="subtraction">Subtraction</div>
+        </div>
+        <div class="question-modal" id="question-modal">
+            <table>
+                <tbody>
+                    <tr>
+                        <td id="question"></td>
+                        <td>
+                            <input type="text" class="answer" [(ngModel)]="currentAnswer">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button (click)="answer()" class="btn-answer">Answer</button>
+        </div>
+    </div>
+
+
+    <audio id="chill-music">
+      <source src="./assets/musics/chill.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="battle-music">
+      <source src="./assets/musics/battle.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="attack-music">
+        <source src="./assets/musics/attack.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="victory-small-music">
+        <source src="./assets/musics/victory-small.mp3" type="audio/mpeg">
+    </audio>
+
+</div>

@@ -1,0 +1,341 @@
+.container {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    border: 2px solid black;
+    // background-color: grey;
+}
+
+.battle-options {
+    display: none;
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+    height: 20px;
+    border-style: solid;
+    border-color: transparent transparent #8D450F transparent;
+    border-width: 0 100px 50px 100px;
+    animation-duration: 2000ms;
+}
+
+.roaming {
+    // display: none;
+    width: 100%;
+    height: 100%;
+    background-image: url("/../../assets/tiles/tile-2.jpg");
+    animation-duration: 2000ms;
+}
+
+.battle {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.run {
+    position: absolute;
+    top: 30px;
+    width: 100px;
+    padding: 8px;
+    background-color: #F6F5E2;
+    border-radius: 6px;
+    border: 2px solid black;
+    &:hover {
+        background-color: black;
+        color: #F6F5E2;
+        cursor: pointer;
+    }
+}
+
+.pokemon-detail {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 200px;
+    height: 60px;
+    background-color: #F6F5E2;
+    box-shadow: 8px 11px 20px 0px black;
+    border-top-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border: 2px solid black;
+}
+
+.pokemon-name {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+}
+
+.pokemon-exp {
+    position: absolute;
+    top: 10px;
+    left: 135px;
+}
+
+.hp {
+    color: #F2E822;
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+.health-bar {
+    position: absolute;
+    left: 30px;
+    top: 1px;
+    color: white;
+    width: 100px;
+    height: 18px;
+    background-color: grey;
+}
+
+.health {
+    position: absolute;
+    width: 100px;
+    height: 18px;
+    background-color: #117B5C;
+}
+
+.pokemon-health {
+    position: absolute;
+    top: 30px;
+    left: 50px;
+    width: 130px;
+    height: 20px;
+    background-color: black;
+    border-top-left-radius: 20%;
+    border-bottom-left-radius: 20%;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 2px solid black;
+}
+
+.attack-options {
+    position: absolute;
+    bottom: 0px;
+}
+
+.multiplication,
+.division,
+.addition,
+.subtraction {
+    position: absolute;
+    border-radius: 6px;
+    border: 2px solid black;
+    width: 150px;
+    height: 30px;
+    background-color: #F6F5E2;
+    &:hover {
+        color: #F6F5E2;
+        background-color: black;
+        cursor: pointer;
+    }
+}
+
+.multiplication {
+    bottom: 60px;
+    left: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.division {
+    bottom: 60px;
+    left: 180px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.addition {
+    bottom: 10px;
+    left: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.subtraction {
+    bottom: 10px;
+    left: 180px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.pokemon-position {
+    position: absolute;
+    top: 50px;
+    right: 40px;
+    animation: pokemonEntrance 2s;
+    img {
+        width: 70px;
+        animation-duration: 2000ms;
+    }
+}
+
+.battle-patch {
+    position: absolute;
+    top: 60px;
+    right: -30px;
+    width: 150px;
+    height: 40px;
+    background-image: url('/assets/tiles/tile-grass.png');
+    background-size: 100% 100%;
+    opacity: 0.8;
+}
+
+.question-modal {
+    display: none;
+    background-color: #F6F5E2;
+    width: 80%;
+    margin: 150px auto;
+    border-radius: 4px;
+    border: 2px solid black;
+}
+
+table {
+    background-color: #117B5C;
+    color: white;
+    border: 2px solid black;
+    margin: 20px auto;
+    max-width: 500px;
+    img {
+        height: 48px;
+        width: 48px;
+    }
+    tr {
+        td {
+            padding: 2px 8px;
+            &.exp-bar {
+                width: 200px;
+                height: 100%;
+                background-color: grey;
+                border-radius: 8px;
+                border: 3px solid black;
+                padding: 0;
+            }
+        }
+    }
+}
+
+#question {
+    letter-spacing: 5px;
+    font-size: 25px;
+}
+
+.btn-answer {
+    margin: 0 auto;
+    margin-bottom: 10px;
+    display: block;
+    background-color: #8D450F;
+    color: white;
+    padding: 6px 20px;
+    font-size: 30px;
+    border-radius: 6px;
+    animation: answerBarGlow 1.5s infinite;
+}
+
+.answer {
+    width: 50px;
+    font-size: 25px;
+    border-radius: 6px;
+}
+
+#exp {
+    vertical-align: top;
+    display: inline-block;
+    width: 100px;
+    height: 18px;
+    background-color: #C6E63E;
+    animation: expBarGlow 1s infinite;
+}
+
+.player,
+.tree,
+.pokemon {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    background-size: 100% 100%;
+}
+
+.exit {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #0B2027;
+    color: white;
+    letter-spacing: 4px;
+    &:hover {
+        cursor: pointer;
+        background-color: #40798C;
+        border: 4px solid white;
+    }
+}
+
+@keyframes stageDisappearAnimation {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        display: none;
+        opacity: 0;
+    }
+}
+
+@keyframes pokemonEntrance {
+    0% {
+        top: 0px;
+        right: 0px;
+        opacity: 0;
+    }
+    100% {
+        top: 50px;
+        right: 40px;
+        opacity: 1;
+    }
+}
+
+@keyframes expBarGlow {
+    0% {
+        background-color: #D5D6C9;
+    }
+    100% {
+        background-color: #C6E63E;
+    }
+}
+
+@keyframes battleOptionsEntrance {
+    0% {
+        opacity: 0;
+        margin-top: 20px;
+    }
+    100% {
+        opacity: 1;
+        margin-top: 0px;
+    }
+}
+
+@keyframes answerBarGlow {
+    0% {
+        opacity: 0.5;
+        background-color: black;
+    }
+    100% {
+        opacity: 1;
+        background-color: #8D450F;
+    }
+}
+
+@keyframes pokemonCaptured {
+    0% {
+        width: 100px;
+        opacity: 0.8;
+    }
+    100% {
+        width: 0px;
+        opacity: 0;
+    }
+}
