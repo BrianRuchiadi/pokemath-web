@@ -1,10 +1,20 @@
 header {
+    position: relative;
     box-shadow: 7px 3px 10px black;
     font-family: 'Oswald', sans-serif;
+    z-index: 1000;
     background-color: #FFFFFF;
     .logo {
         vertical-align: middle;
         display: inline-block;
+        width: 250px;
+        height: 90px;
+        background-image: url('/assets/logo.png');
+        background-size: cover;
+    }
+    .logo-center {
+        display: block;
+        margin: 0 auto;
         width: 250px;
         height: 90px;
         background-image: url('/assets/logo.png');
