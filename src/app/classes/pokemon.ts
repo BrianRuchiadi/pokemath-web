@@ -1,8 +1,8 @@
 export class Pokemon {
     id: number;
-    type: string;
-    reference: string;
     name: string;
-    icon: string;
-    total_station: number;
+    sprite: string;
+    image: string;
+    unlock_point: number;
+    health_point: number;
 }

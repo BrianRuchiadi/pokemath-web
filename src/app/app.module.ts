@@ -15,11 +15,13 @@ import { StageComponent } from './components/pages/stage/stage.component';
 import { PlayComponent } from './components/pages/play/play.component';
 import { HeaderComponent } from './components/common/header/header.component';
 import { HeaderguestComponent } from './components/common/headerguest/headerguest.component';
-
-import { PlayService } from './services/play.service';
 import { AccountComponent } from './components/pages/account/account.component';
 import { PokedexComponent } from './components/pages/pokedex/pokedex.component';
 import { RegisterComponent } from './components/pages/register/register.component';
+
+import { UserService } from './services/user.service';
+import { StageService } from './services/stage.service';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { RegisterComponent } from './components/pages/register/register.componen
     AngularFontAwesomeModule
   ],
   providers: [
-    PlayService
+    UserService,
+    StageService
     // services
   ],
   bootstrap: [AppComponent]

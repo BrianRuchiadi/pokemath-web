@@ -4,38 +4,18 @@
     <thead>
         <tr>
             <th colspan="2">
-                <button class="exit" (click)="goToMenu()">
-                  <i class="fa fa-home"></i>
-                  Back To Menu
-                </button>
+                <h1>Stage {{stage}}</h1>
             </th>
         </tr>
         <tr>
             <th colspan="2">
-                <h1>Stage One</h1>
+                <button class="exit" (click)="goToMenu()">
+                      <i class="fa fa-home"></i>
+                      Back To Menu
+                    </button>
             </th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td>Level</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>Exp to next level</td>
-            <td class="exp-bar">
-                <span id="exp"></span>
-            </td>
-        </tr>
-        <tr>
-            <td>Pokemons in this area</td>
-            <td>
-                <img src="/assets/pokedex/squirtle-obtained.png" />
-                <img src="/assets/pokedex/charmander-obtained.png" />
-                <img src="/assets/pokedex/bulbasaur-obtained.png" />
-            </td>
-        </tr>
-    </tbody>
 </table>
 <div class="battle-options" id="battle-options">
     <div class="run" (click)="escape()">Run</div>
@@ -58,10 +38,16 @@
         </div>
         <div class="pokemon" id="pokemon-2">
         </div>
+        <div class="pokemon" id="pokemon-3">
+        </div>
+        <div class="pokemon" id="pokemon-4">
+        </div>
+        <div class="pokemon" id="pokemon-5">
+        </div>
     </div>
     <div class="battle" id="battle">
         <div class="pokemon-detail" id="pokemon-detail">
-            <span class="pokemon-name">Charmander</span>
+            <span class="pokemon-name">{{ pokemonEncountered.name | titlecase }}</span>
             <span class="pokemon-exp">Exp: 50</span>
             <div class="pokemon-health">
                 <span class="hp">HP</span>
@@ -72,7 +58,7 @@
         </div>
 
         <div class="pokemon-position">
-            <img src="/assets/pokemons/charmander.gif" class="pokemon-active" id="battle-pokemon" />
+            <img src="/assets/{{pokemonEncountered.sprite}}" class="pokemon-active" id="battle-pokemon" />
             <div class="battle-patch"></div>
         </div>
 

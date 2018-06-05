@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 
 import { KEY_CODE} from './../../../enums/keycode';
 
+import { StageService } from './../../../services/stage.service';
+
+import { Pokemon } from './../../../classes/pokemon';
 // player
 import { playerSetup } from './../../../functions/player/player';
 // movement
@@ -21,6 +24,10 @@ import { startMusic, stopMusic, startMusicOnce } from './../../../functions/musi
 import { initCanvas } from './../../../functions/canvas/canvas';
 // question
 import { generateQuestion } from './../../../functions/questions/questions';
+// pokemon
+import { createPokemons } from './../../../functions/pokemons/pokemons';
+import { respawnPokemon } from './../../../functions/pokemons/pokemons';
+import { removePokemon } from './../../../functions/pokemons/pokemons';
 
 @Component({
   selector: 'app-play',
@@ -28,6 +35,7 @@ import { generateQuestion } from './../../../functions/questions/questions';
   styleUrls: ['../../../styles/pages/_play.scss']
 })
 export class PlayComponent implements OnInit {
+  stage: number;
   container: any;
   player: any;
   treeOne: any;
@@ -50,10 +58,19 @@ export class PlayComponent implements OnInit {
   pokemonThree: any;
   pokemonFour: any;
   pokemonFive: any;
+  pokemonEncountered: any = {
+    id: null,
+    name: null,
+    sprite: null,
+    image: null,
+    unlock_point: null,
+    health_point: null
+  };
   pokemonOneHealth: number = 20;
   pokemonOneMaxHealth: number = 20;
   currentQuestion: any;
   currentQuestionType: any;
+  pokemonsGenerated: Array<Pokemon> = [];
   // elements
   roaming: any;
   battle: any;
@@ -77,9 +94,9 @@ export class PlayComponent implements OnInit {
   victorySmallMusic: any;
 
   constructor(
-    private router: Router
-  ) {
-  }
+    private router: Router,
+    private stageService: StageService
+  ) {}
 
   @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
@@ -98,12 +115,13 @@ export class PlayComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.stage = 1;
+
     this.initPokemonsElementSelector();
     this.initContainer();
     this.initPlayer();
     this.initTrees();
-    this.initPokemonOne();
-    this.initPokemonTwo();
+    this.initPokemons(this.stage);
     this.initMusicsElementSelector();
     this.initBattleElementSelector();
 
@@ -176,7 +194,6 @@ export class PlayComponent implements OnInit {
   }
 
   answer() {
-    // this one need to return to attack scene, or regenerate next question
     if (!this.currentAnswer || (eval(this.currentQuestion) !== +this.currentAnswer)) {
       this.attack(this.currentQuestionType);
       return;
@@ -290,7 +307,7 @@ export class PlayComponent implements OnInit {
       currentPokemonY = this.pokemonY[i];
 
       if (x === currentPokemonX && y === currentPokemonY) {
-        console.log(['bang, pokemon encountered, it is ', this.pokemon[i]]);
+        console.log(['this.pokemon isPokemonPath', this.pokemon, this.pokemon[i]]);
         this.pokemonBattleScene(this.pokemon[i]);
         return true;
       }
@@ -301,6 +318,12 @@ export class PlayComponent implements OnInit {
 
   pokemonBattleScene(pokemon) {
     this.isBattling = true;
+    console.log(['what pokemon encountered before', pokemon, this.pokemonEncountered, this.pokemonsGenerated]);
+
+    this.pokemonEncountered = this.pokemonsGenerated.find((poke) => poke.id = pokemon);
+
+    console.log(['what pokemon encountered after', pokemon, this.pokemonEncountered, this.pokemonsGenerated]);
+
     this.battlePokemon.style.animationName = 'pokemonEntrance';
     this.roaming.style.animationName = 'stageDisappearAnimation';
     this.battleOptions.style.animationName = 'battleOptionsEntrance';
@@ -336,56 +359,38 @@ export class PlayComponent implements OnInit {
 
     treesInit = stageTwoTreesSetup(
       this.treeOne, this.treeTwo, this.treeThree, this.treeFour, this.treeFive,
-      this.treeSix, this.treeSeven, this.treeEight, this.treeNine, this.treeTen
+      this.treeSix, this.treeSeven, this.treeEight, this.treeNine, this.treeTen,
+      this.obstacleX, this.obstacleY
     );
-
-    this.treeOne = treesInit.treeOneElement;
-    this.treeTwo = treesInit.treeTwoElement;
-    this.treeThree = treesInit.treeThreeElement;
-    this.treeFour = treesInit.treeFourElement;
-    this.treeFive = treesInit.treeFiveElement;
-    this.treeSix = treesInit.treeSixElement;
-    this.treeSeven = treesInit.treeSevenElement;
-    this.treeEight = treesInit.treeEightElement;
-    this.treeNine = treesInit.treeNineElement;
-    this.treeTen = treesInit.treeTenElement;
-
-    this.obstacleX = [...this.obstacleX, ...treesInit.obstacleX];
-    this.obstacleY = [...this.obstacleY, ...treesInit.obstacleY];
   }
 
   initPlayer() {
     this.player = document.getElementById('player');
-    this.player = playerSetup(this.player);
+    playerSetup(this.player);
   }
 
-  initPokemonOne() {
-    this.pokemonOne.style.display = 'block';
-    this.pokemonOne.style.backgroundImage = 'url("./assets/pokemons/charmander.gif")';
-    this.pokemonOne.style.top = '100px';
-    this.pokemonOne.style.left = '0px';
-    // this for loop is still a prototype, need dynamic value replacement
-    for (let x = 0; x <= 70; x += 10) {
-      for (let y = 80; y <= 120; y += 10) {
-        this.pokemonX.push(x);
-        this.pokemonY.push(y);
-        this.pokemon.push('charmander');
-      }
-    }
-  }
+  initPokemons(stageId) {
+    let initPokemonsSetup;
+    return this.stageService.getStagePokemons(stageId)
+      .subscribe(response => {
+        this.pokemonsGenerated = response;
 
-  initPokemonTwo() {
-    this.pokemonTwo.style.backgroundImage = 'url("./assets/pokemons/squirtle.gif")';
-    this.pokemonTwo.style.top = '50px';
-    this.pokemonTwo.style.left = '450px';
-    // this for loop is still a prototype, need dynamic value replacement
-    for (let x = 430; x <= 520; x += 10) {
-      for (let y = 50; y <= 80; y += 10) {
-        this.pokemonX.push(x);
-        this.pokemonY.push(y);
-        this.pokemon.push('squirtle');
-      }
-    }
+        initPokemonsSetup = createPokemons(
+          this.pokemonOne,
+          this.pokemonTwo,
+          this.pokemonThree,
+          this.pokemonFour,
+          this.pokemonFive,
+          this.pokemonsGenerated[0],
+          this.pokemonsGenerated[1],
+          this.pokemonsGenerated[2],
+          this.pokemonsGenerated[3],
+          this.pokemonsGenerated[4],
+          this.pokemonX,
+          this.pokemonY,
+          this.pokemon
+        );
+      });
   }
 
   goToMenu() {
@@ -401,22 +406,99 @@ export class PlayComponent implements OnInit {
     this.pokemonRespawn();
   }
 
-  // prototype
   pokemonRespawn() {
+    const pokemonToBeRespawned = this.pokemonEncountered;
     this.pokemonDisappear();
-    // 10 seconds to respawn
-    setTimeout(() => this.initPokemonOne(), 10000);
-  }
-  // prototype
-  pokemonDisappear() {
-    this.pokemonOne.style.display = 'none';
-    for (let i = 0; i < this.pokemon.length; i++) {
-      if (this.pokemon[i] === 'charmander') {
-        this.pokemonX[i] = null;
-        this.pokemonY[i] = null;
-        this.pokemon[i] = null;
+
+    setTimeout(() => {
+      if (pokemonToBeRespawned === this.pokemonsGenerated[0].id) {
+        respawnPokemon(
+          this.pokemonOne,
+          pokemonToBeRespawned,
+          this.pokemonX,
+          this.pokemonY,
+          this.pokemon
+        );
+      } else if (pokemonToBeRespawned === this.pokemonsGenerated[1].id) {
+        respawnPokemon(
+          this.pokemonTwo,
+          pokemonToBeRespawned,
+          this.pokemonX,
+          this.pokemonY,
+          this.pokemon
+        );
+      } else if (pokemonToBeRespawned === this.pokemonsGenerated[2].id) {
+        respawnPokemon(
+          this.pokemonThree,
+          pokemonToBeRespawned,
+          this.pokemonX,
+          this.pokemonY,
+          this.pokemon
+        );
+      } else if (pokemonToBeRespawned === this.pokemonsGenerated[3].id) {
+        respawnPokemon(
+          this.pokemonFour,
+          pokemonToBeRespawned,
+          this.pokemonX,
+          this.pokemonY,
+          this.pokemon
+        );
+      } else if (pokemonToBeRespawned === this.pokemonsGenerated[4].id) {
+        respawnPokemon(
+          this.pokemonFive,
+          pokemonToBeRespawned,
+          this.pokemonX,
+          this.pokemonY,
+          this.pokemon
+        );
       }
+    }, 3000);
+  }
+
+  pokemonDisappear() {
+    this.pokemonEncountered = null;
+    if (this.pokemonEncountered.id === this.pokemonsGenerated[0].id) {
+      removePokemon(
+        this.pokemonOne,
+        this.pokemonEncountered,
+        this.pokemonX,
+        this.pokemonY,
+        this.pokemon
+      );
+    } else if (this.pokemonEncountered.id === this.pokemonsGenerated[1].id) {
+      removePokemon(
+        this.pokemonTwo,
+        this.pokemonEncountered,
+        this.pokemonX,
+        this.pokemonY,
+        this.pokemon
+      );
+    } else if (this.pokemonEncountered.id === this.pokemonsGenerated[2].id) {
+      removePokemon(
+        this.pokemonThree,
+        this.pokemonEncountered,
+        this.pokemonX,
+        this.pokemonY,
+        this.pokemon
+      );
+    } else if (this.pokemonEncountered.id === this.pokemonsGenerated[3].id) {
+      removePokemon(
+        this.pokemonFour,
+        this.pokemonEncountered,
+        this.pokemonX,
+        this.pokemonY,
+        this.pokemon
+      );
+    } else if (this.pokemonEncountered.id === this.pokemonsGenerated[4].id) {
+      removePokemon(
+        this.pokemonFive,
+        this.pokemonEncountered,
+        this.pokemonX,
+        this.pokemonY,
+        this.pokemon
+      );
     }
+
     this.pokemonX = this.pokemonX.filter((obj) => obj );
     this.pokemonY = this.pokemonY.filter((obj) => obj );
     this.pokemon = this.pokemon.filter((obj) => obj );
