@@ -9,11 +9,10 @@ export const trees = (
     treeSevenElement,
     treeEightElement,
     treeNineElement,
-    treeTenElement
+    treeTenElement,
+    obstacleX,
+    obstacleY
 ) => {
-    let obstacleX = [];
-    let obstacleY = [];
-
     let treeImage = 'url("/assets/trees/tree-1.png")';
     let treeWidth = '50px';
     let treeHeight = '50px';
