@@ -334,7 +334,7 @@ export class PlayComponent implements OnInit {
     this.treeNine = document.getElementById('tree-9');
     this.treeTen = document.getElementById('tree-10');
 
-    treesInit = stageOneTreesSetup(
+    treesInit = stageTwoTreesSetup(
       this.treeOne, this.treeTwo, this.treeThree, this.treeFour, this.treeFive,
       this.treeSix, this.treeSeven, this.treeEight, this.treeNine, this.treeTen
     );
