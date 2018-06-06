@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { KEY_CODE} from './../../../enums/keycode';
 
 import { StageService } from './../../../services/stage.service';
-
+import { UserService } from './../../../services/user.service';
+// classes
+import { UserGameComponent } from './../../../classes/user-game-component';
 import { Pokemon } from './../../../classes/pokemon';
 // player
 import { playerSetup } from './../../../functions/player/player';
@@ -35,7 +37,28 @@ import { removePokemon } from './../../../functions/pokemons/pokemons';
   styleUrls: ['../../../styles/pages/_play.scss']
 })
 export class PlayComponent implements OnInit {
+  userGameComponent: UserGameComponent;
   stage: number;
+  userId: number;
+  obstacleX: Array<number> = [];
+  obstacleY: Array<number> = [];
+  pokemonX: Array<number> = [];
+  pokemonY: Array<number> = [];
+  pokemon: Array<any> = [];
+
+  pokemonEncountered: any = {
+    id: null,
+    name: null,
+    sprite: null,
+    image: null,
+    unlock_point: null,
+    health_point: null
+  };
+  currentQuestion: any;
+  currentQuestionType: any;
+  pokemonsGenerated: Array<Pokemon> = [];
+
+  // elements
   container: any;
   player: any;
   treeOne: any;
@@ -48,30 +71,11 @@ export class PlayComponent implements OnInit {
   treeEight: any;
   treeNine: any;
   treeTen: any;
-  obstacleX: Array<number> = [];
-  obstacleY: Array<number> = [];
-  pokemonX: Array<number> = [];
-  pokemonY: Array<number> = [];
-  pokemon: Array<any> = [];
   pokemonOne: any;
   pokemonTwo: any;
   pokemonThree: any;
   pokemonFour: any;
   pokemonFive: any;
-  pokemonEncountered: any = {
-    id: null,
-    name: null,
-    sprite: null,
-    image: null,
-    unlock_point: null,
-    health_point: null
-  };
-  pokemonOneHealth: number = 20;
-  pokemonOneMaxHealth: number = 20;
-  currentQuestion: any;
-  currentQuestionType: any;
-  pokemonsGenerated: Array<Pokemon> = [];
-  // elements
   roaming: any;
   battle: any;
   foeHealth: any;
@@ -85,8 +89,10 @@ export class PlayComponent implements OnInit {
   battlePokemon: any;
   question: any;
   currentAnswer: any;
+
   // states
   isBattling: Boolean = false;
+
   // musics
   chillMusic: any;
   battleMusic: any;
@@ -95,7 +101,8 @@ export class PlayComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private stageService: StageService
+    private stageService: StageService,
+    private userService: UserService
   ) {}
 
   @HostListener('window:keydown', ['$event'])
@@ -116,7 +123,9 @@ export class PlayComponent implements OnInit {
 
   ngOnInit() {
     this.stage = 1;
+    this.userId = 1;
 
+    this.initGameComponent(this.userId);
     this.initPokemonsElementSelector();
     this.initContainer();
     this.initPlayer();
@@ -198,12 +207,19 @@ export class PlayComponent implements OnInit {
       this.attack(this.currentQuestionType);
       return;
     }
-
     switch (this.currentQuestionType) {
-      case 'multiplication': this.minusPokemonHealth(10); break;
-      case 'division': this.minusPokemonHealth(10); break;
-      case 'addition': this.minusPokemonHealth(7); break;
-      case 'subtraction': this.minusPokemonHealth(7); break;
+      case 'multiplication':
+        this.minusPokemonHealth(this.userGameComponent.power_multiplication);
+        break;
+      case 'division':
+        this.minusPokemonHealth(this.userGameComponent.power_division);
+        break;
+      case 'addition':
+        this.minusPokemonHealth(this.userGameComponent.power_addition);
+        break;
+      case 'subtraction':
+        this.minusPokemonHealth(this.userGameComponent.power_subtraction);
+        break;
     }
   }
 
@@ -211,12 +227,12 @@ export class PlayComponent implements OnInit {
     let displayPx;
 
     this.attackMusic = startMusicOnce(this.attackMusic);
-    this.pokemonOneHealth -= damage;
-    displayPx = (this.pokemonOneHealth / this.pokemonOneMaxHealth) * 100;
+    this.pokemonEncountered.health -= damage;
+    displayPx = (this.pokemonEncountered.health / this.pokemonEncountered.health_point) * 100;
 
     if (displayPx <= 0) {
       displayPx = 0;
-      this.pokemonCapturedScene();
+      this.pokemonDefeatedScene();
     }
     this.initAttackSuccessScene();
     this.foeHealth.style.width = displayPx + 'px';
@@ -307,7 +323,6 @@ export class PlayComponent implements OnInit {
       currentPokemonY = this.pokemonY[i];
 
       if (x === currentPokemonX && y === currentPokemonY) {
-        console.log(['this.pokemon isPokemonPath', this.pokemon, this.pokemon[i]]);
         this.pokemonBattleScene(this.pokemon[i]);
         return true;
       }
@@ -318,16 +333,9 @@ export class PlayComponent implements OnInit {
 
   pokemonBattleScene(pokemon) {
     this.isBattling = true;
-    console.log(['what pokemon encountered before', pokemon, this.pokemonEncountered, this.pokemonsGenerated]);
+    this.pokemonEncountered = this.pokemonsGenerated.find((poke) => poke.id === pokemon);
 
-    this.pokemonEncountered = this.pokemonsGenerated.find((poke) => poke.id = pokemon);
-
-    console.log(['what pokemon encountered after', pokemon, this.pokemonEncountered, this.pokemonsGenerated]);
-
-    this.battlePokemon.style.animationName = 'pokemonEntrance';
-    this.roaming.style.animationName = 'stageDisappearAnimation';
-    this.battleOptions.style.animationName = 'battleOptionsEntrance';
-    this.battlePokemon.style.opacity = '1';
+    this.initBattleElements();
 
     setTimeout(() => {
       this.battleOptions.style.display = 'block';
@@ -393,6 +401,23 @@ export class PlayComponent implements OnInit {
       });
   }
 
+  initGameComponent(userId) {
+    return this.userService.getUserGameComponent(userId)
+      .subscribe(response => {
+        this.userGameComponent = response[0];
+      });
+  }
+
+  initBattleElements() {
+    const displayPx = (this.pokemonEncountered.health / this.pokemonEncountered.health_point) * 100;
+    this.foeHealth.style.width = displayPx + 'px';
+
+    this.battlePokemon.style.animationName = 'pokemonEntrance';
+    this.roaming.style.animationName = 'stageDisappearAnimation';
+    this.battleOptions.style.animationName = 'battleOptionsEntrance';
+    this.battlePokemon.style.opacity = '1';
+  }
+
   goToMenu() {
     this.router.navigate(['/home']);
   }
@@ -407,11 +432,11 @@ export class PlayComponent implements OnInit {
   }
 
   pokemonRespawn() {
-    const pokemonToBeRespawned = this.pokemonEncountered;
+    const pokemonToBeRespawned = JSON.parse(JSON.stringify(this.pokemonEncountered));
     this.pokemonDisappear();
 
     setTimeout(() => {
-      if (pokemonToBeRespawned === this.pokemonsGenerated[0].id) {
+      if (pokemonToBeRespawned.id === this.pokemonsGenerated[0].id) {
         respawnPokemon(
           this.pokemonOne,
           pokemonToBeRespawned,
@@ -419,7 +444,7 @@ export class PlayComponent implements OnInit {
           this.pokemonY,
           this.pokemon
         );
-      } else if (pokemonToBeRespawned === this.pokemonsGenerated[1].id) {
+      } else if (pokemonToBeRespawned.id === this.pokemonsGenerated[1].id) {
         respawnPokemon(
           this.pokemonTwo,
           pokemonToBeRespawned,
@@ -427,7 +452,7 @@ export class PlayComponent implements OnInit {
           this.pokemonY,
           this.pokemon
         );
-      } else if (pokemonToBeRespawned === this.pokemonsGenerated[2].id) {
+      } else if (pokemonToBeRespawned.id === this.pokemonsGenerated[2].id) {
         respawnPokemon(
           this.pokemonThree,
           pokemonToBeRespawned,
@@ -435,7 +460,7 @@ export class PlayComponent implements OnInit {
           this.pokemonY,
           this.pokemon
         );
-      } else if (pokemonToBeRespawned === this.pokemonsGenerated[3].id) {
+      } else if (pokemonToBeRespawned.id === this.pokemonsGenerated[3].id) {
         respawnPokemon(
           this.pokemonFour,
           pokemonToBeRespawned,
@@ -443,7 +468,7 @@ export class PlayComponent implements OnInit {
           this.pokemonY,
           this.pokemon
         );
-      } else if (pokemonToBeRespawned === this.pokemonsGenerated[4].id) {
+      } else if (pokemonToBeRespawned.id === this.pokemonsGenerated[4].id) {
         respawnPokemon(
           this.pokemonFive,
           pokemonToBeRespawned,
@@ -456,7 +481,6 @@ export class PlayComponent implements OnInit {
   }
 
   pokemonDisappear() {
-    this.pokemonEncountered = null;
     if (this.pokemonEncountered.id === this.pokemonsGenerated[0].id) {
       removePokemon(
         this.pokemonOne,
@@ -498,17 +522,18 @@ export class PlayComponent implements OnInit {
         this.pokemon
       );
     }
-
     this.pokemonX = this.pokemonX.filter((obj) => obj );
     this.pokemonY = this.pokemonY.filter((obj) => obj );
     this.pokemon = this.pokemon.filter((obj) => obj );
   }
 
-  pokemonCapturedScene() {
+  pokemonDefeatedScene() {
     this.pokemonDisappear();
     this.initElementAttackState();
     this.battleMusic = stopMusic(this.battleMusic);
     this.victorySmallMusic = startMusicOnce(this.victorySmallMusic);
+
+    // here call service to update pokedex and exp this.pokemonEncountered
 
     this.battlePokemon.style.animationName = 'pokemonCaptured';
     setTimeout(() => {

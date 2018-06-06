@@ -29,7 +29,7 @@ export const createPokemons = (
 
     // Start positioning X, Y
     pokemonOneElement.style.left = '0px';    
-    pokemonOneElement.style.top = '100px';
+    pokemonOneElement.style.top = '200px';
 
     pokemonTwoElement.style.left = '450px';
     pokemonTwoElement.style.top = '50px';   
@@ -104,6 +104,12 @@ export const createPokemons = (
             pokemons.push(pokemonFive.id);
         }
     }
+
+    pokemonOne.health = pokemonOne.health_point;
+    pokemonTwo.health = pokemonTwo.health_point;
+    pokemonThree.health = pokemonThree.health_point;
+    pokemonFour.health = pokemonFour.health_point;
+    pokemonFive.health = pokemonFive.health_point;
 }
 
 export const respawnPokemon = (
@@ -115,9 +121,6 @@ export const respawnPokemon = (
 ) => {
     element.style.display = 'block';
     element.style.backgroundImage = 'url("./assets/' + pokemon.sprite + '")';    
-
-    element.style.left = '0px';    
-    element.style.top = '100px';
 
     let pokemonXStart = +element.style.left.replace('px','') - 20;
     let pokemonXEnd = +element.style.left.replace('px','') + 20;

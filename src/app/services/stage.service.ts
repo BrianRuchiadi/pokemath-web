@@ -23,5 +23,4 @@ export class StageService {
         tap(stagePokemon => console.log('getStagePokemon api called'))
       );
   }
-
 }

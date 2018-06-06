@@ -5,8 +5,9 @@ import { environment } from './../../environments/environment';
 
 import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { UserPokedex } from './../classes/user-pokedex';
 
+import { UserPokedex } from './../classes/user-pokedex';
+import { UserGameComponent } from './../classes/user-game-component';
 
 const API_URL = environment.apiUrl;
 
@@ -21,6 +22,13 @@ export class UserService {
     return this.http.get<UserPokedex[]>(API_URL + '/user/' + userId + '/pokedex')
       .pipe(
         tap(userPokedex => console.log('getUserPokedex api called'))
+      );
+  }
+
+  public getUserGameComponent(userId): Observable<UserGameComponent[]> {
+    return this.http.get<UserGameComponent[]>(API_URL + '/user/' + userId + '/game-component')
+      .pipe(
+        tap(userGameComponent => console.log('getUserGameComponent api called'))
       );
   }
 
