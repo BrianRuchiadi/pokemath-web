@@ -1,9 +1,10 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
 import { KEY_CODE} from './../../../enums/keycode';
 
-import { StageService } from './../../../services/stage.service';
+import { GameService } from './../../../services/game.service';
 import { UserService } from './../../../services/user.service';
 // classes
 import { UserGameComponent } from './../../../classes/user-game-component';
@@ -89,6 +90,8 @@ export class PlayComponent implements OnInit {
   battlePokemon: any;
   question: any;
   currentAnswer: any;
+  currentHealth: any;
+  maxHealth: any;
 
   // states
   isBattling: Boolean = false;
@@ -100,8 +103,9 @@ export class PlayComponent implements OnInit {
   victorySmallMusic: any;
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
-    private stageService: StageService,
+    private gameService: GameService,
     private userService: UserService
   ) {}
 
@@ -122,19 +126,10 @@ export class PlayComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.stage = 1;
+    this.stage = (this.route.snapshot.params.stageId) ? +this.route.snapshot.params.stageId : 1;
     this.userId = 1;
 
     this.initGameComponent(this.userId);
-    this.initPokemonsElementSelector();
-    this.initContainer();
-    this.initPlayer();
-    this.initTrees();
-    this.initPokemons(this.stage);
-    this.initMusicsElementSelector();
-    this.initBattleElementSelector();
-
-    this.chillMusic = startMusic(this.chillMusic);
   }
 
   movePlayer(direction) {
@@ -142,25 +137,25 @@ export class PlayComponent implements OnInit {
 
     switch (direction) {
       case 'down':
-        this.player = animateMovement(this.player, 'down');
+        this.player = animateMovement(this.player, 'down', this.userGameComponent.avatar_id);
         setTimeout(() => {
           this.updatePlayerPosition('down');
         }, 150);
         break;
       case 'left':
-        this.player = animateMovement(this.player, 'left');
+        this.player = animateMovement(this.player, 'left', this.userGameComponent.avatar_id);
         setTimeout(() => {
           this.updatePlayerPosition('left');
         }, 150);
         break;
       case 'up':
-        this.player = animateMovement(this.player, 'up');
+        this.player = animateMovement(this.player, 'up', this.userGameComponent.avatar_id);
         setTimeout(() => {
           this.updatePlayerPosition('up');
         }, 150);
         break;
       case 'right':
-        this.player = animateMovement(this.player, 'right');
+        this.player = animateMovement(this.player, 'right', this.userGameComponent.avatar_id);
         setTimeout(() => {
           this.updatePlayerPosition('right');
         }, 150);
@@ -236,6 +231,7 @@ export class PlayComponent implements OnInit {
     }
     this.initAttackSuccessScene();
     this.foeHealth.style.width = displayPx + 'px';
+    this.currentHealth.innerHTML = (this.pokemonEncountered.health > 0) ? this.pokemonEncountered.health : 0;
   }
 
   updatePlayerPosition(direction) {
@@ -352,8 +348,6 @@ export class PlayComponent implements OnInit {
   }
 
   initTrees() {
-    let treesInit;
-
     this.treeOne = document.getElementById('tree-1');
     this.treeTwo = document.getElementById('tree-2');
     this.treeThree = document.getElementById('tree-3');
@@ -365,25 +359,70 @@ export class PlayComponent implements OnInit {
     this.treeNine = document.getElementById('tree-9');
     this.treeTen = document.getElementById('tree-10');
 
-    treesInit = stageOneTreesSetup(
-      this.treeOne, this.treeTwo, this.treeThree, this.treeFour, this.treeFive,
-      this.treeSix, this.treeSeven, this.treeEight, this.treeNine, this.treeTen,
-      this.obstacleX, this.obstacleY
-    );
+    switch (this.stage) {
+      case 1:
+        stageOneTreesSetup(
+          this.treeOne, this.treeTwo, this.treeThree, this.treeFour, this.treeFive,
+          this.treeSix, this.treeSeven, this.treeEight, this.treeNine, this.treeTen,
+          this.obstacleX, this.obstacleY
+        );
+        break;
+      case 2:
+        stageTwoTreesSetup(
+          this.treeOne, this.treeTwo, this.treeThree, this.treeFour, this.treeFive,
+          this.treeSix, this.treeSeven, this.treeEight, this.treeNine, this.treeTen,
+          this.obstacleX, this.obstacleY
+        );
+        break;
+      case 3:
+        stageThreeTreesSetup(
+          this.treeOne, this.treeTwo, this.treeThree, this.treeFour, this.treeFive,
+          this.treeSix, this.treeSeven, this.treeEight, this.treeNine, this.treeTen,
+          this.obstacleX, this.obstacleY
+        );
+        break;
+      case 4:
+        stageFourTreesSetup(
+          this.treeOne, this.treeTwo, this.treeThree, this.treeFour, this.treeFive,
+          this.treeSix, this.treeSeven, this.treeEight, this.treeNine, this.treeTen,
+          this.obstacleX, this.obstacleY
+        );
+        break;
+      case 5:
+        stageFiveTreesSetup(
+          this.treeOne, this.treeTwo, this.treeThree, this.treeFour, this.treeFive,
+          this.treeSix, this.treeSeven, this.treeEight, this.treeNine, this.treeTen,
+          this.obstacleX, this.obstacleY
+        );
+        break;
+      case 6:
+        stageSixTreesSetup(
+          this.treeOne, this.treeTwo, this.treeThree, this.treeFour, this.treeFive,
+          this.treeSix, this.treeSeven, this.treeEight, this.treeNine, this.treeTen,
+          this.obstacleX, this.obstacleY
+        );
+        break;
+      case 7:
+        stageSevenTreesSetup(
+          this.treeOne, this.treeTwo, this.treeThree, this.treeFour, this.treeFive,
+          this.treeSix, this.treeSeven, this.treeEight, this.treeNine, this.treeTen,
+          this.obstacleX, this.obstacleY
+        );
+        break;
+    }
   }
 
   initPlayer() {
     this.player = document.getElementById('player');
-    playerSetup(this.player);
+    playerSetup(this.player, this.userGameComponent.avatar_id);
   }
 
-  initPokemons(stageId) {
-    let initPokemonsSetup;
-    return this.stageService.getStagePokemons(stageId)
+  initPokemons() {
+    return this.gameService.getStagePokemons(this.stage)
       .subscribe(response => {
         this.pokemonsGenerated = response;
 
-        initPokemonsSetup = createPokemons(
+        createPokemons(
           this.pokemonOne,
           this.pokemonTwo,
           this.pokemonThree,
@@ -405,12 +444,27 @@ export class PlayComponent implements OnInit {
     return this.userService.getUserGameComponent(userId)
       .subscribe(response => {
         this.userGameComponent = response[0];
+
+        if (this.userGameComponent.current_stage < this.stage) {
+          this.router.navigate(['/']);
+        }
+        this.initPlayer();
+        this.initPokemonsElementSelector();
+        this.initContainer();
+        this.initTrees();
+        this.initPokemons();
+        this.initMusicsElementSelector();
+        this.initBattleElementSelector();
+
+        console.log(['this.userGameComponent', this.userGameComponent]);
       });
   }
 
   initBattleElements() {
     const displayPx = (this.pokemonEncountered.health / this.pokemonEncountered.health_point) * 100;
     this.foeHealth.style.width = displayPx + 'px';
+    this.currentHealth.innerHTML = this.pokemonEncountered.health;
+    this.maxHealth.innerHTML = '/ ' + this.pokemonEncountered.health_point;
 
     this.battlePokemon.style.animationName = 'pokemonEntrance';
     this.roaming.style.animationName = 'stageDisappearAnimation';
@@ -419,7 +473,7 @@ export class PlayComponent implements OnInit {
   }
 
   goToMenu() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
   }
 
   escape() {
@@ -533,7 +587,18 @@ export class PlayComponent implements OnInit {
     this.battleMusic = stopMusic(this.battleMusic);
     this.victorySmallMusic = startMusicOnce(this.victorySmallMusic);
 
-    // here call service to update pokedex and exp this.pokemonEncountered
+    this.gameService.updateGameLog(this.userId, this.pokemonEncountered.id).subscribe(
+      (response) => {
+        this.userGameComponent = response[0];
+      }
+    );
+
+    if (!this.pokemon.length) {
+      console.log(['battle end!']);
+      setTimeout(() => {
+        this.router.navigate(['/']);
+      }, 2000);
+    }
 
     this.battlePokemon.style.animationName = 'pokemonCaptured';
     setTimeout(() => {
@@ -559,6 +624,8 @@ export class PlayComponent implements OnInit {
     this.battleMusic = document.getElementById('battle-music');
     this.attackMusic = document.getElementById('attack-music');
     this.victorySmallMusic = document.getElementById('victory-small-music');
+
+    this.chillMusic = startMusic(this.chillMusic);    
   }
 
   initBattleElementSelector() {
@@ -567,6 +634,8 @@ export class PlayComponent implements OnInit {
     this.roaming = document.getElementById('roaming');
     this.battle = document.getElementById('battle');
     this.foeHealth = document.getElementById('foe-health');
+    this.currentHealth = document.getElementById('current-health');
+    this.maxHealth = document.getElementById('max-health');
     this.battleOptions = document.getElementById('battle-options');
     this.questionModal = document.getElementById('question-modal');
     this.question = document.getElementById('question');

@@ -11,7 +11,7 @@ const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'play', component: PlayComponent },
+    { path: 'play/:stageId', component: PlayComponent },
     { path: 'pokedex', component: PokedexComponent },
     { path: '**', redirectTo: 'login' },
 ];

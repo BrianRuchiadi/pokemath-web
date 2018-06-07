@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
+import { CommonModule } from '@angular/common';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,7 +20,7 @@ import { PokedexComponent } from './components/pages/pokedex/pokedex.component';
 import { RegisterComponent } from './components/pages/register/register.component';
 
 import { UserService } from './services/user.service';
-import { StageService } from './services/stage.service';
+import { GameService } from './services/game.service';
 
 
 @NgModule({
@@ -41,12 +41,13 @@ import { StageService } from './services/stage.service';
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    CommonModule,
     AppRoutingModule,
     AngularFontAwesomeModule
   ],
   providers: [
     UserService,
-    StageService
+    GameService
     // services
   ],
   bootstrap: [AppComponent]

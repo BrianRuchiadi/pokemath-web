@@ -3,16 +3,16 @@
 <table class="gameboard">
     <thead>
         <tr>
-            <th colspan="2">
-                <h1>Stage {{stage}}</h1>
+            <th *ngIf="userGameComponent">
+                <i class="fa fa-money"></i> {{ userGameComponent.cash }}
             </th>
-        </tr>
-        <tr>
             <th colspan="2">
                 <button class="exit" (click)="goToMenu()">
-                      <i class="fa fa-home"></i>
-                      Back To Menu
-                    </button>
+                    <i class="fa fa-home"></i>
+                </button>
+            </th>
+            <th *ngIf="userGameComponent">
+                Exp : {{ userGameComponent.exp_accumulated }}
             </th>
         </tr>
     </thead>
@@ -54,6 +54,10 @@
                 <div class="health-bar">
                     <div class="health" id="foe-health"></div>
                 </div>
+            </div>
+            <div class="pokemon-health-detail">
+                <div id="current-health"> 80</div>
+                <div id="max-health"> / 100</div>
             </div>
         </div>
 

@@ -53,7 +53,7 @@
     top: 10px;
     left: 10px;
     width: 200px;
-    height: 60px;
+    height: 90px;
     background-color: #F6F5E2;
     box-shadow: 8px 11px 20px 0px black;
     border-top-left-radius: 8px;
@@ -193,10 +193,11 @@
 }
 
 table {
-    background-color: #117B5C;
-    color: white;
-    border: 2px solid black;
     margin: 20px auto;
+    background-color: #F6F5E2;
+    border-radius: 4px;
+    color: black;
+    border: 2px solid black;
     max-width: 500px;
     img {
         height: 48px;
@@ -205,14 +206,6 @@ table {
     tr {
         td {
             padding: 2px 8px;
-            &.exp-bar {
-                width: 200px;
-                height: 100%;
-                background-color: grey;
-                border-radius: 8px;
-                border: 3px solid black;
-                padding: 0;
-            }
         }
     }
 }
@@ -249,6 +242,18 @@ table {
     animation: expBarGlow 1s infinite;
 }
 
+.pokemon-health-detail {
+    position: absolute;
+    top: 60px;
+    left: 90px;
+    font-weight: bold;
+}
+
+#current-health,
+#max-health {
+    display: inline-block;
+}
+
 .player,
 .tree,
 .pokemon {
@@ -263,13 +268,22 @@ table {
     width: 100%;
     padding-top: 10px;
     padding-bottom: 10px;
-    background-color: #0B2027;
+    background-color: #8C271E;
+    border-radius: 6px;
+    border: 1px solid white;
     color: white;
-    letter-spacing: 4px;
+    text-align: center;
     &:hover {
         cursor: pointer;
-        background-color: #40798C;
+        background-color: white;
+        color: #8C271E;
     }
+}
+
+.fa.fa-money {
+    margin-right: 10px;
+    font-size: 20px;
+    color: #F4B61A;
 }
 
 @keyframes stageDisappearAnimation {

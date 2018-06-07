@@ -32,4 +32,17 @@ export class UserService {
       );
   }
 
+  public updateAttackPower(userLog) {
+    return this.http.post(API_URL + '/user/' + userLog.user_id + '/attack/update', {
+      userLog: userLog
+    }).subscribe(
+      res => {
+        console.log(['updateAttackPower response', res]);
+      },
+      err => {
+        console.log(['updateAttackPower error', err]);
+      }
+    );
+  }
+
 }

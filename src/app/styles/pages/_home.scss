@@ -1,8 +1,8 @@
 .container {
     margin: 20px auto;
     display: block;
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
 }
 
 table {
@@ -21,7 +21,7 @@ table {
             td {
                 width: 100%;
                 padding: 20px 0px;
-                background-color: #0B2027;
+                background-color: #8C271E;
                 color: white;
                 text-align: center;
                 border-radius: 4px;
@@ -37,7 +37,7 @@ table {
             padding: 4px 10px;
             &.attack-bar {
                 padding: 0px;
-                width: 200px;
+                width: 100px;
                 height: 20px;
                 background-color: grey;
                 border-radius: 6px;
@@ -74,6 +74,13 @@ table {
         background-color: white;
         color: #F4B61A;
     }
+    .disabled {
+        opacity: 0.3;
+        pointer-events: none;
+        &:hover {
+            pointer-events: none;
+        }
+    }
 }
 
 .current-bar {
@@ -86,6 +93,9 @@ table {
 .disabled {
     opacity: 0.3;
     pointer-events: none;
+    &:hover {
+        pointer-events: none;
+    }
 }
 
 .left {
@@ -99,4 +109,19 @@ table {
 .fa.fa-money {
     font-size: 20px;
     color: #F4B61A;
+}
+
+.fa.fa-lock {
+    padding-right: 20px;
+    font-size: 20px;
+}
+
+.exp-needed {
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.text-center {
+    text-align: center;
 }
