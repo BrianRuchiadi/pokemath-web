@@ -15,6 +15,7 @@ table {
     box-shadow: 0px 0px 20px 3px black;
     animation: highlightBox 3s infinite;
     border-radius: 4px;
+    text-align: center;
     tr {
         th {
             font-size: 30px;
@@ -30,12 +31,19 @@ table {
 }
 
 input {
+    display: block;
     background-color: #E6E5E2;
     font-family: 'Oswald', sans-serif;
     border-radius: 4px;
     border: 2px solid black;
+    margin: 0 auto;
     font-size: 20px;
     padding: 4px;
+    &.important {
+        border: 8px solid black;
+        text-align: center;
+        font-weight: bold;
+    }
 }
 
 button {
@@ -75,6 +83,12 @@ a {
 
 .text-left {
     text-align: left;
+}
+
+.error {
+    color: red;
+    font-style: italic;
+    font-size: 90% !important;
 }
 
 img {

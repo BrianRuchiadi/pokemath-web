@@ -1,24 +1,18 @@
 <app-headerguest></app-headerguest>
 
-<div class="container">
-    <table>
-        <tr>
+<div class="container" id="container">
+    <table id="register-table">
+        <tr *ngIf="this.isFillingFormState">
             <td width="40"></td>
-            <td><input type="text" placeholder="username"></td>
+            <td><input type="text" placeholder="username" [(ngModel)]="username"></td>
             <td width="40"></td>
         </tr>
-        <tr>
+        <tr *ngIf="error.username">
             <td></td>
-            <td><input type="password" placeholder="password"></td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td></td>
-            <td><input type="password" placeholder="password repeat"></td>
+            <td class="error">{{ error.username }}</td>
             <td></td>
         </tr>
-        <tr>
+        <tr *ngIf="this.isFillingFormState">
             <td></td>
             <td class="small-text">select your hero :</td>
             <td></td>
@@ -33,16 +27,42 @@
         <tr>
             <td></td>
             <td>
-                <button>Register</button>
+                <button (click)="createUser()" [ladda]="isRegisterButtonProcessing">Register</button>
             </td>
             <td></td>
         </tr>
-
+    </table>
+    <table id="register-success">
+        <tr>
+            <td width="40"></td>
+            <td>
+                <h3>Register Successful!</h3>
+            </td>
+            <td width="40"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Here is your password!</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="text" [(ngModel)]="password" class="important"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button (click)="goToMenu()">Continue</button>
+            </td>
+            <td></td>
+        </tr>
     </table>
 </div>
+
 <audio id="intro-music">
-  <source src="./assets/musics/intro.mp3" type="audio/mpeg">
+    <source src="./assets/musics/intro.mp3" type="audio/mpeg">
 </audio>
 <audio id="click-music">
     <source src="./assets/musics/click.mp3" type="audio/mpeg">
-  </audio>
+</audio>

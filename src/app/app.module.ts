@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { LaddaModule } from 'angular2-ladda';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -21,7 +21,8 @@ import { RegisterComponent } from './components/pages/register/register.componen
 
 import { UserService } from './services/user.service';
 import { GameService } from './services/game.service';
-
+import { MiscService } from './services/misc.service';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -42,12 +43,15 @@ import { GameService } from './services/game.service';
     HttpClientModule,
     FormsModule,
     CommonModule,
+    LaddaModule,
     AppRoutingModule,
     AngularFontAwesomeModule
   ],
   providers: [
     UserService,
-    GameService
+    GameService,
+    MiscService,
+    AuthService
     // services
   ],
   bootstrap: [AppComponent]
