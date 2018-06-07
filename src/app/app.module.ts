@@ -7,7 +7,6 @@ import { LaddaModule } from 'angular2-ladda';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppRoutingModule } from './app-routing.module';
 
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { HomeComponent } from './components/pages/home/home.component';
@@ -23,6 +22,8 @@ import { UserService } from './services/user.service';
 import { GameService } from './services/game.service';
 import { MiscService } from './services/misc.service';
 import { AuthService } from './services/auth.service';
+
+import { AuthUserGuard } from './guards/auth.user.guard';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { AuthService } from './services/auth.service';
     UserService,
     GameService,
     MiscService,
-    AuthService
+    AuthService,
+    AuthUserGuard
     // services
   ],
   bootstrap: [AppComponent]
