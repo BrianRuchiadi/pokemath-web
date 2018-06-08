@@ -51,7 +51,6 @@ export class PlayComponent implements OnInit {
     name: null,
     sprite: null,
     image: null,
-    unlock_point: null,
     health_point: null
   };
   currentQuestion: any;

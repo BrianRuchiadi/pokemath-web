@@ -3,6 +3,5 @@ export class Pokemon {
     name: string;
     sprite: string;
     image: string;
-    unlock_point: number;
     health_point: number;
 }

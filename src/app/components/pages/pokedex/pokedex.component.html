@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="image-container" *ngFor="let pokemon of pokedex">
-        <img *ngIf="pokemon.user_id" src="/assets/pokedex/colour/{{pokemon.name}}.png">
-        <img *ngIf="!pokemon.user_id" src="/assets/pokedex/black-white/{{pokemon.name}}.png">
+        <img *ngIf="pokemon.user_id" src="/assets/pokedex/colour/{{pokemon.image}}">
+        <img *ngIf="!pokemon.user_id" src="/assets/pokedex/black-white/{{pokemon.image}}">
     </div>
 </div>
