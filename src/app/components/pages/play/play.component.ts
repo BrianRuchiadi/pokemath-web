@@ -622,7 +622,7 @@ export class PlayComponent implements OnInit {
     this.attackMusic = document.getElementById('attack-music');
     this.victorySmallMusic = document.getElementById('victory-small-music');
 
-    this.chillMusic = startMusic(this.chillMusic);    
+    this.chillMusic = startMusic(this.chillMusic);
   }
 
   initBattleElementSelector() {
