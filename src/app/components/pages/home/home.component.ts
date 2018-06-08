@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
   }
 
   initUserInfo() {
-    this.userService.getUserGameComponent(this.userId).subscribe(
+    this.userService.getUserGameComponent().subscribe(
       response => {
         this.userInfo = response[0];
         this.userInfo.is_upgrade = false;
@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
     let pokedexTotal: number = 0;
     let completionPercentage: String = '';
 
-    this.userService.getUserPokedex(this.userId).subscribe(
+    this.userService.getUserPokedex().subscribe(
       response => {
         this.pokedexInfo = response;
 
@@ -171,7 +171,7 @@ export class HomeComponent implements OnInit {
   }
 
   confirmUpgradeAttackPower() {
-    this.userService.updateAttackPower(this.userInfo);
+    this.userService.updateAttackPower();
     this.userInfo.is_upgrade = false;
   }
 

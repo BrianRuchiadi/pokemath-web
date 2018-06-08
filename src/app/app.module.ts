@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LaddaModule } from 'angular2-ladda';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { RouterModule } from '@angular/router';
+
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -24,6 +26,7 @@ import { MiscService } from './services/misc.service';
 import { AuthService } from './services/auth.service';
 
 import { AuthUserGuard } from './guards/auth.user.guard';
+import { RequestInterceptorsProviders } from './middlewares/request/request-interceptors';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,7 @@ import { AuthUserGuard } from './guards/auth.user.guard';
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    RouterModule,
     CommonModule,
     LaddaModule,
     AppRoutingModule,
@@ -53,8 +57,10 @@ import { AuthUserGuard } from './guards/auth.user.guard';
     GameService,
     MiscService,
     AuthService,
-    AuthUserGuard
+    AuthUserGuard,
     // services
+    RequestInterceptorsProviders
+    // middleware
   ],
   bootstrap: [AppComponent]
 })

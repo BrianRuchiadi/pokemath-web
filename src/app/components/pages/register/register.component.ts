@@ -38,6 +38,9 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    const accessToken = localStorage.getItem('accessToken');
+
+    if (accessToken) { this.router.navigate(['/']); }
     this.getAvatarCount();
     this.initSectionElementSelector();
     this.initAvatarElementSelector();

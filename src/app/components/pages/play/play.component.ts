@@ -441,7 +441,7 @@ export class PlayComponent implements OnInit {
   }
 
   initGameComponent(userId) {
-    return this.userService.getUserGameComponent(userId)
+    return this.userService.getUserGameComponent()
       .subscribe(response => {
         this.userGameComponent = response[0];
 
@@ -587,7 +587,7 @@ export class PlayComponent implements OnInit {
     this.battleMusic = stopMusic(this.battleMusic);
     this.victorySmallMusic = startMusicOnce(this.victorySmallMusic);
 
-    this.gameService.updateGameLog(this.userId, this.pokemonEncountered.id).subscribe(
+    this.gameService.updateGameLog(this.pokemonEncountered.id).subscribe(
       (response) => {
         this.userGameComponent = response[0];
       }

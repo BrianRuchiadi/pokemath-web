@@ -4,18 +4,28 @@
     <table>
         <tr>
             <td width="40"></td>
-            <td><input type="text" placeholder="username"></td>
+            <td><input type="text" placeholder="username" [(ngModel)]="username"></td>
             <td width="40"></td>
+        </tr>
+        <tr *ngIf="error.username">
+            <td></td>
+            <td class="error">{{ error.username }}</td>
+            <td></td>
         </tr>
         <tr>
             <td width="40"></td>
-            <td><input type="password" placeholder="password"></td>
+            <td><input type="password" placeholder="password" [(ngModel)]="password"></td>
             <td width="40"></td>
+        </tr>
+        <tr *ngIf="error.password">
+            <td></td>
+            <td class="error">{{ error.password }}</td>
+            <td></td>
         </tr>
         <tr>
             <td width="40"></td>
             <td>
-                <button>Login</button>
+                <button (click)="login()">Login</button>
             </td>
             <td width="40"></td>
         </tr>

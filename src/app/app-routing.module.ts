@@ -10,8 +10,8 @@ import { AuthUserGuard } from './guards/auth.user.guard';
 
 const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthUserGuard]},
-    { path: 'login', component: LoginComponent},
-    { path: 'register', component: RegisterComponent},
+    { path: 'login', component: LoginComponent, canActivate: []},
+    { path: 'register', component: RegisterComponent, canActivate: []},
     { path: 'play/:stageId', component: PlayComponent, canActivate: [AuthUserGuard]},
     { path: 'pokedex', component: PokedexComponent, canActivate: [AuthUserGuard]},
     { path: '**', redirectTo: 'login', canActivate: [AuthUserGuard]},

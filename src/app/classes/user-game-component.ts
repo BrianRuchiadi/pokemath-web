@@ -6,7 +6,7 @@ export class UserGameComponent {
     current_stage: number;
     level: number;
     exp_accumulated: number;
-    cash: number;
+    cash: number | string;
     battle_won: number;
     power_multiplication: number;
     power_division: number;
@@ -15,7 +15,7 @@ export class UserGameComponent {
     total_pokemon_owned: number;
     // additional helping properties, which are not the main
     is_upgrade: null | any;
-    pokedexCompletion: null | any;
+    pokedex_completion: null | any;
     cost_power_division: null | any;
     cost_power_multiplication: null | any;
     cost_power_addition: null | any;

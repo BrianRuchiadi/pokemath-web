@@ -34,9 +34,8 @@ export class GameService {
       );
   }
 
-  public updateGameLog(userId, pokemonId): Observable<UserGameComponent> {
-    return this.http.post<UserGameComponent>(API_URL + '/battle/' + userId + '/' + pokemonId + '/win', {
-      userId: userId,
+  public updateGameLog(pokemonId): Observable<UserGameComponent> {
+    return this.http.post<UserGameComponent>(API_URL + '/battle/' + pokemonId + '/win', {
       pokemonId: pokemonId
     })
       .pipe(

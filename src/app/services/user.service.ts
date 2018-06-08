@@ -18,24 +18,22 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  public getUserPokedex(userId): Observable<UserPokedex[]> {
-    return this.http.get<UserPokedex[]>(API_URL + '/user/' + userId + '/pokedex')
+  public getUserPokedex(): Observable<UserPokedex[]> {
+    return this.http.get<UserPokedex[]>(API_URL + '/user/pokedex')
       .pipe(
         tap(userPokedex => console.log('getUserPokedex api called'))
       );
   }
 
-  public getUserGameComponent(userId): Observable<UserGameComponent[]> {
-    return this.http.get<UserGameComponent[]>(API_URL + '/user/' + userId + '/game-component')
+  public getUserGameComponent(): Observable<UserGameComponent[]> {
+    return this.http.get<UserGameComponent[]>(API_URL + '/user/game-component')
       .pipe(
         tap(userGameComponent => console.log('getUserGameComponent api called'))
       );
   }
 
-  public updateAttackPower(userLog) {
-    return this.http.post(API_URL + '/user/' + userLog.user_id + '/attack/update', {
-      userLog: userLog
-    }).subscribe(
+  public updateAttackPower() {
+    return this.http.post(API_URL + '/user/attack/update', {}).subscribe(
       res => {
         console.log(['updateAttackPower response', res]);
       },

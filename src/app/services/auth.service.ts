@@ -15,7 +15,7 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  public register(username, avatarId) {
+  public register(username, avatarId): Observable<any> {
     return this.http.post(API_URL + '/register', {
       username: username,
       avatarId: avatarId
@@ -25,7 +25,7 @@ export class AuthService {
       );
   }
 
-  public login(username, password): any {
+  public login(username, password): Observable<any> {
       return this.http.post(API_URL + '/login', {
           username: username,
           password: password

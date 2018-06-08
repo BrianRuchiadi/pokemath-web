@@ -22,7 +22,7 @@ export class PokedexComponent implements OnInit {
   }
 
   getPokedex() {
-    return this.userService.getUserPokedex(this.userId)
+    return this.userService.getUserPokedex()
       .subscribe(response => {
         this.pokedex = response;
 
