@@ -40,7 +40,6 @@ import { removePokemon } from './../../../functions/pokemons/pokemons';
 export class PlayComponent implements OnInit {
   userGameComponent: UserGameComponent;
   stage: number;
-  userId: number;
   obstacleX: Array<number> = [];
   obstacleY: Array<number> = [];
   pokemonX: Array<number> = [];
@@ -127,9 +126,8 @@ export class PlayComponent implements OnInit {
 
   ngOnInit() {
     this.stage = (this.route.snapshot.params.stageId) ? +this.route.snapshot.params.stageId : 1;
-    this.userId = 1;
 
-    this.initGameComponent(this.userId);
+    this.initGameComponent();
   }
 
   movePlayer(direction) {
@@ -440,7 +438,7 @@ export class PlayComponent implements OnInit {
       });
   }
 
-  initGameComponent(userId) {
+  initGameComponent() {
     return this.userService.getUserGameComponent()
       .subscribe(response => {
         this.userGameComponent = response[0];

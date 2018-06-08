@@ -15,7 +15,6 @@ import { UserPokedex } from './../../../classes/user-pokedex';
   styleUrls: ['../../../styles/pages/_home.scss']
 })
 export class HomeComponent implements OnInit {
-  userId: number;
   pokedexInfo: UserPokedex[];
   stageInfo: StageConcise[];
   userInfo: UserGameComponent;
@@ -33,8 +32,6 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userId = 1;
-
     this.initUserInfo();
   }
 

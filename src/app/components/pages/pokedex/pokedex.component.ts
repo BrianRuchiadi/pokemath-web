@@ -8,7 +8,6 @@ import { UserPokedex } from './../../../classes/user-pokedex';
   styleUrls: ['../../../styles/pages/_pokedex.scss']
 })
 export class PokedexComponent implements OnInit {
-  userId: number;
   pokedex: UserPokedex[];
 
   constructor(
@@ -16,8 +15,6 @@ export class PokedexComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userId = 1;
-
     this.getPokedex();
   }
 
