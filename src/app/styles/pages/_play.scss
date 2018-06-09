@@ -6,6 +6,17 @@
     // background-color: grey;
 }
 
+.game-container {
+    @media (min-width: 431px) and (max-width: 500px) {
+        transform: scale(0.8);
+        transform-origin: 120px 0;
+    }
+    @media (min-width: 300px) and (max-width: 430px) {
+        transform: scale(0.6);
+        transform-origin: 60px 0;
+    }
+}
+
 .battle-options {
     display: none;
     position: relative;
@@ -262,6 +273,59 @@ table {
     height: 50px;
     background-color: transparent;
     background-size: 100% 100%;
+}
+
+.player-left,
+.player-right,
+.player-top,
+.player-bottom {
+    position: absolute;
+}
+
+.player-left {
+    left: -20px;
+    width: 40px;
+    height: 50px;
+    i {
+        position: absolute;
+        top: 20px;
+        right: 15px;
+    }
+}
+
+.player-right {
+    width: 40px;
+    height: 50px;
+    left: 30px;
+    i {
+        position: absolute;
+        top: 20px;
+        left: 15px;
+    }
+}
+
+.player-top {
+    top: -20px;
+    left: 10px;
+    width: 30px;
+    height: 40px;
+    i {
+        position: absolute;
+        bottom: 15px;
+        left: 8px;
+    }
+}
+
+.player-bottom {
+    top: 30px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    i {
+        position: absolute;
+        top: 15px;
+        left: 8px;
+    }
 }
 
 .exit {
