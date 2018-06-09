@@ -12,6 +12,10 @@ header {
         background-size: 100%;
         background-position: center;
         background-repeat: no-repeat;
+        @media (max-width: 600px) {
+            display: block;
+            margin: 0 auto;
+        }
     }
     .logo-center {
         display: block;
@@ -26,6 +30,12 @@ header {
     ul {
         display: inline-block;
         vertical-align: middle;
+        @media (max-width: 600px) {
+            display: block;
+            margin: 0;
+            padding: 10px 0px;
+            text-align: center;
+        }
         li {
             padding: 0px 20px;
             list-style-type: none;
