@@ -1,5 +1,53 @@
 <app-header></app-header>
 
-<p>
-    account works!
-</p>
+<div class="container">
+    <table *ngIf="!updatePasswordSuccess">
+        <tr>
+            <td width="40"></td>
+            <td width="180" class="text-center">Password</td>
+            <td width="40"></td>
+        </tr>
+        <tr>
+            <td width="40"></td>
+            <td width="180"><input type="text" placeholder="password" [(ngModel)]="password"></td>
+            <td width="40"></td>
+        </tr>
+        <tr *ngIf="error.password">
+            <td width="40"></td>
+            <td width="180" class="error">{{ error.password }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td width="40"></td>
+            <td width="180">
+                <button (click)="updatePassword()" [ladda]="isUpdatePasswordButtonProcessing">Update</button>
+            </td>
+            <td width="40"></td>
+        </tr>
+    </table>
+
+    <table *ngIf="updatePasswordSuccess">
+        <tr>
+            <td width="40"></td>
+            <td width="180" class="text-center">Congratulations!</td>
+            <td width="40"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td width="180" class="small-text">Your password has been updated!</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td width="180"><input readonly="true" [(ngModel)]="password" type="text"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td width="40"></td>
+            <td width="180">
+                <button (click)="goToHome()">Back To Home</button>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+</div>

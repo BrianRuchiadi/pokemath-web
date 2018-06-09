@@ -26,12 +26,21 @@ export class AuthService {
   }
 
   public login(username, password): Observable<any> {
-      return this.http.post(API_URL + '/login', {
-          username: username,
-          password: password
-      })
-        .pipe(
-            tap(login => console.log('login api called'))
-        );
+    return this.http.post(API_URL + '/login', {
+        username: username,
+        password: password
+    })
+      .pipe(
+          tap(login => console.log('login api called'))
+      );
+  }
+
+  public updatePassword(password): Observable<any> {
+    return this.http.post(API_URL + '/password/update', {
+      password: password
+    })
+      .pipe(
+        tap(updatePassword => console.log('updatePassword api called'))
+      );
   }
 }

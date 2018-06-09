@@ -5,6 +5,7 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { PlayComponent } from './components/pages/play/play.component';
 import { PokedexComponent } from './components/pages/pokedex/pokedex.component';
+import { AccountComponent } from './components/pages/account/account.component';
 import { RegisterComponent } from './components/pages/register/register.component';
 import { AuthUserGuard } from './guards/auth.user.guard';
 
@@ -14,6 +15,7 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent, canActivate: []},
     { path: 'play/:stageId', component: PlayComponent, canActivate: [AuthUserGuard]},
     { path: 'pokedex', component: PokedexComponent, canActivate: [AuthUserGuard]},
+    { path: 'account', component: AccountComponent, canActivate: [AuthUserGuard]},
     { path: '**', redirectTo: 'login', canActivate: [AuthUserGuard]},
 ];
 

@@ -51,8 +51,7 @@ export class RegisterComponent implements OnInit {
 
   getAvatarCount() {
     this.miscService.getAvatarsCount().subscribe(
-      (response) => { this.totalAvatars = response;
-        console.log(['this.totalAvatars', this.totalAvatars]); }
+      (response) => { this.totalAvatars = response; }
     );
   }
 

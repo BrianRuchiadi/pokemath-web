@@ -196,9 +196,13 @@ export class PlayComponent implements OnInit {
 
   answer() {
     if (!this.currentAnswer || (eval(this.currentQuestion) !== +this.currentAnswer)) {
+      this.currentAnswer = '';
       this.attack(this.currentQuestionType);
       return;
     }
+
+    this.currentAnswer = '';
+
     switch (this.currentQuestionType) {
       case 'multiplication':
         this.minusPokemonHealth(this.userGameComponent.power_multiplication);
