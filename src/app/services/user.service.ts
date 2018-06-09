@@ -32,8 +32,10 @@ export class UserService {
       );
   }
 
-  public updateAttackPower() {
-    return this.http.post(API_URL + '/user/attack/update', {}).subscribe(
+  public updateAttackPower(userLog) {
+    return this.http.post(API_URL + '/user/attack/update', {
+      userLog: userLog
+    }).subscribe(
       res => {
         console.log(['updateAttackPower response', res]);
       },

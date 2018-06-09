@@ -2,7 +2,9 @@
     margin: 20px auto;
     display: block;
     width: 400px;
-    height: 400px;
+    @media (max-width: 500px) {
+        width: 100vw;
+    }
 }
 
 table {

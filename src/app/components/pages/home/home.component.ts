@@ -168,7 +168,7 @@ export class HomeComponent implements OnInit {
   }
 
   confirmUpgradeAttackPower() {
-    this.userService.updateAttackPower();
+    this.userService.updateAttackPower(this.userInfo);
     this.userInfo.is_upgrade = false;
   }
 
