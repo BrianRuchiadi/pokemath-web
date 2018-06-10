@@ -162,7 +162,7 @@ export const trees = (
     treeFourElement.style.top = '50px';
 
     treeFiveElement.style.left = '400px';
-    treeFiveElement.style.top = '50px';
+    treeFiveElement.style.top = '0px';
 
     treeSixElement.style.left = '400px';
     treeSixElement.style.top = '100px';
