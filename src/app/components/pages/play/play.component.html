@@ -4,17 +4,19 @@
         <thead>
             <tr>
                 <th *ngIf="userGameComponent">
-                    <i class="fa fa-money"></i> {{ userGameComponent.cash }}
+                    <i class="fa fa-money"></i>
                 </th>
-                <th colspan="2">
-                    <button class="exit" (click)="goToMenu()">
-                    <i class="fa fa-home"></i>
-                </button>
-                </th>
-                <th *ngIf="userGameComponent">
-                    Exp : {{ userGameComponent.exp_accumulated }}
+                <th>
+                    : {{ userGameComponent.cash }}
                 </th>
             </tr>
+            <tr>
+                <th *ngIf="userGameComponent">
+                    Exp
+                </th>
+                <th>: {{ userGameComponent.exp_accumulated | number:'1.0-0'}}</th>
+            </tr>
+
         </thead>
     </table>
     <div class="game-container">
@@ -22,6 +24,20 @@
             <div class="run" (click)="escape()">Run</div>
         </div>
         <div class="container" id="container">
+            <div class="keypad" *ngIf="!isBattling">
+                <div class="keypad-left" (click)="movePlayer('left')">
+                    <i class="fa fa-chevron-left"></i>
+                </div>
+                <div class="keypad-up" (click)="movePlayer('up')">
+                    <i class="fa fa-chevron-up"></i>
+                </div>
+                <div class="keypad-right" (click)="movePlayer('right')">
+                    <i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="keypad-down" (click)="movePlayer('down')">
+                    <i class="fa fa-chevron-down"></i>
+                </div>
+            </div>
             <div class="roaming" id="roaming">
                 <div class="player" id="player">
                     <div class="player-left" (click)="movePlayer('left')">
@@ -101,6 +117,7 @@
                 </div>
             </div>
         </div>
+
 
 
         <audio id="chill-music">

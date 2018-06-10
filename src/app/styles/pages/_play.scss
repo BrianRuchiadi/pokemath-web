@@ -1,19 +1,21 @@
 .container {
     position: relative;
     display: block;
-    margin: 0 auto;
-    border: 2px solid black;
-    // background-color: grey;
+    margin: 50px auto;
+    @media (min-width: 300px) and (max-width: 600px) {
+        margin: auto;
+        // transform-origin: 120px 0;
+    }
 }
 
 .game-container {
-    @media (min-width: 431px) and (max-width: 500px) {
-        transform: scale(0.8);
-        transform-origin: 120px 0;
+    @media (min-width: 431px) and (max-width: 600px) {
+        transform: scale(0.7);
+        // transform: translateX(0.5);
     }
     @media (min-width: 300px) and (max-width: 430px) {
         transform: scale(0.6);
-        transform-origin: 60px 0;
+        margin-left: -40px;
     }
 }
 
@@ -210,6 +212,7 @@ table {
     color: black;
     border: 2px solid black;
     max-width: 500px;
+    text-align: left;
     img {
         height: 48px;
         width: 48px;
@@ -280,6 +283,75 @@ table {
 .player-top,
 .player-bottom {
     position: absolute;
+}
+
+.keypad-left,
+.keypad-right,
+.keypad-up,
+.keypad-down {
+    position: absolute;
+    border: 1px solid white;
+    color: white;
+}
+
+.keypad-left {
+    top: 0px;
+    left: -30px;
+    height: 400px;
+    border-right: 30px solid #068BB3;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    font-size: 25px;
+    i {
+        position: absolute;
+        top: 180px;
+        left: 0px;
+    }
+}
+
+.keypad-right {
+    top: 0px;
+    left: 500px;
+    height: 400px;
+    border-left: 30px solid #068BB3;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    font-size: 25px;
+    i {
+        position: absolute;
+        top: 180px;
+        left: -20px;
+    }
+}
+
+.keypad-up {
+    top: -31px;
+    left: 0px;
+    width: 400px;
+    border-bottom: 30px solid #068BB3;
+    text-align: center;
+    font-size: 25px;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    i {
+        position: absolute;
+        top: 0px;
+    }
+}
+
+.keypad-down {
+    top: 500px;
+    left: 0px;
+    width: 400px;
+    border-top: 30px solid #068BB3;
+    text-align: center;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    font-size: 25px;
+    i {
+        position: absolute;
+        bottom: 0px;
+    }
 }
 
 .player-left {

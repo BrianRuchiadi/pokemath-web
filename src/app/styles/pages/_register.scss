@@ -7,6 +7,12 @@
     width: 100vw;
 }
 
+.wrapper {
+    background-image: url("./../../../assets/background.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 table {
     margin: 20px auto;
     padding: 40px 0px;

@@ -63,6 +63,12 @@ a {
     }
 }
 
+.wrapper {
+    background-image: url("./../../../assets/background.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 @keyframes highlightBox {
     0% {
         box-shadow: 0px 0px 20px 3px white;
