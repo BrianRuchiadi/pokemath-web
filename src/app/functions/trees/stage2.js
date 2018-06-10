@@ -69,7 +69,7 @@ export const trees = (
     treeThreeElement.style.top = '100px';
 
     treeFourElement.style.left = '0px';
-    treeFourElement.style.top = '200px';
+    treeFourElement.style.top = '150px';
 
     treeFiveElement.style.left = '450px';
     treeFiveElement.style.top = '350px';
@@ -77,11 +77,11 @@ export const trees = (
     treeSixElement.style.left = '400px';
     treeSixElement.style.top = '350px';
 
-    treeSevenElement.style.left = '250px';
+    treeSevenElement.style.left = '200px';
     treeSevenElement.style.top = '250px';
 
     treeEightElement.style.left = '400px';
-    treeEightElement.style.top = '50px';
+    treeEightElement.style.top = '0px';
 
     treeNineElement.style.left = '450px';
     treeNineElement.style.top = '100px';

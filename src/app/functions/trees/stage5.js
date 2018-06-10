@@ -149,10 +149,10 @@ export const trees = (
     // let treeTwentyFiveYRangeEnd = 0
 
     // START set each tree X, Y 
-    treeOneElement.style.left = '50px';
-    treeOneElement.style.top = '50px';
+    treeOneElement.style.left = '0px';
+    treeOneElement.style.top = '150px';
 
-    treeTwoElement.style.left = '50px';
+    treeTwoElement.style.left = '450px';
     treeTwoElement.style.top = '100px';
 
     treeThreeElement.style.left = '50px';
@@ -162,7 +162,7 @@ export const trees = (
     treeFourElement.style.top = '50px';
 
     treeFiveElement.style.left = '150px';
-    treeFiveElement.style.top = '200px';
+    treeFiveElement.style.top = '300px';
 
     treeSixElement.style.left = '250px';
     treeSixElement.style.top = '200px';
